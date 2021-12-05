@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <title>Laracamp by BuildWith Angga</title>
+    <title>Landing Page</title>
 </head>
 
 <body>
@@ -46,10 +46,10 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <a href="#" class="btn btn-master btn-secondary me-3">
+                    <a href="{{ route('login') }}" class="btn btn-master btn-secondary me-3">
                         Sign In
                     </a>
-                    <a href="#" class="btn btn-master btn-primary ">
+                    <a href="{{ route('login') }}" class="btn btn-master btn-primary ">
                         Sign Up
                     </a>
                 </div>
