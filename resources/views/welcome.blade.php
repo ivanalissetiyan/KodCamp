@@ -255,7 +255,7 @@
                         <div class="col-lg-6 col-12">
                             <div class="table-pricing paket-gila">
                                 <p class="story text-center">
-                                    FULL BELAJAR
+                                    FULL BELAJAR sip
                                 </p>
                                 <h1 class="price text-center">
                                     Rp380.000
