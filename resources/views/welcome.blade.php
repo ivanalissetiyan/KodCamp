@@ -223,7 +223,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="table-pricing paket-gila">
                                     <p class="story text-center">
-                                        FULL BELAJAR sip
+                                        FULL BELAJAR
                                     </p>
                                     <h1 class="price text-center">
                                         Rp380.000
@@ -292,7 +292,8 @@
                                         <div class="clear"></div>
                                     </div>
                                     <p>
-                                        <a href="{{ route('checkout') }}" class="btn btn-master btn-primary w-100 mt-3">
+                                        <a href="{{ route('checkout', 'full-belajar') }}"
+                                            class="btn btn-master btn-primary w-100 mt-3">
                                             Take This Plan
                                         </a>
                                     </p>
@@ -338,7 +339,7 @@
                                         <div class="clear"></div>
                                     </div>
                                     <p>
-                                        <a href="{{ route('checkout') }}"
+                                        <a href="{{ route('checkout', 'baru-mulai') }}"
                                             class="btn btn-master btn-secondary w-100 mt-3">
                                             Start With This Plan
                                         </a>
@@ -449,8 +450,8 @@
         <!-- Optional JavaScript; choose one of the two! -->
 
         <!-- Option 1: Bootstrap Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
         </script>
 
     </body>
