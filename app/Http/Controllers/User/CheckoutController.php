@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Checkout;
 use Illuminate\Http\Request;
-use App\Models\Camps;
+use App\Models\Camp;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
@@ -25,7 +25,7 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Camps $camp)
+    public function create(Camp $camp)
     {
         // return $camp;
         // return view('checkout');
@@ -40,7 +40,7 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Camps $camp)
+    public function store(Request $request, Camp $camp)
     {
 
         // mapping request data
