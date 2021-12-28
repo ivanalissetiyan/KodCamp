@@ -25,8 +25,13 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Camp $camp)
+    public function create(Camp $camp, Request $request)
     {
+
+        if ($camp->isRegistered) {
+            $request->session()->flash('error', "Kamu sudah melakukan pendaftaran {$camp->title} Camp.");
+            return redirect(route('dashboard'));
+        }
         // return $camp;
         // return view('checkout');
         return view('checkout.create', [
