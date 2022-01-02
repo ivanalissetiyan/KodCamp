@@ -26,7 +26,7 @@
                                     <tr>
                                         <td>{{ $checkout->User->name }}</td>
                                         <td>{{ $checkout->Camp->title }}</td>
-                                        <td>Rp.{{ $checkout->Camp->price }}.000</td>
+                                        <td>Rp {{ $checkout->Camp->price }}.000</td>
                                         <td>{{ $checkout->created_at->format('M d Y') }}</td>
                                         <td>
                                             @if ($checkout->is_paid)
@@ -36,10 +36,15 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <form action="" method="post">
-                                                @csrf
-                                                <button class="btn btn-outline-info">Set to Paid</button>
-                                            </form>
+                                            @if (!$checkout->is_paid)
+                                                <form action="{{ route('admin.checkout.update', $checkout->id) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <button class="btn btn-outline-info">Set to Paid</button>
+                                                </form>
+                                            @else
+
+                                            @endif
                                         </td>
                                     </tr>
                                 @empty
