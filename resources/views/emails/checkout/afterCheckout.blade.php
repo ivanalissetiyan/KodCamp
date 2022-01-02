@@ -6,8 +6,8 @@
     Terimakasih telah melakukan registrasi untuk <b>{{ $checkout->Camp->title }}</b>, Silahkan langkah selanjutnya yaitu
     melakukan pembayaran
 
-    @component('mail::button', ['url' => route('user.checkout.invoice', $checkout->id)])
-        Get Invoice
+    @component('mail::button', ['url' => route('dashboard', $checkout->id)])
+        My Dashboard
     @endcomponent
 
     Terimakasih,<br>

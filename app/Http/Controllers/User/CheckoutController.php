@@ -33,7 +33,7 @@ class CheckoutController extends Controller
 
         if ($camp->isRegistered) {
             $request->session()->flash('error', "Kamu sudah melakukan pendaftaran {$camp->title} Camp.");
-            return redirect(route('dashboard'));
+            return redirect(route('user.dashboard'));
         }
         // return $camp;
         // return view('checkout');
@@ -120,10 +120,5 @@ class CheckoutController extends Controller
     public function success()
     {
         return view('checkout.success');
-    }
-
-    public function invoice(Checkout $checkout)
-    {
-        return $checkout;
     }
 }
