@@ -23,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'pekerjaan',
+        'phone',
+        'address',
         'avatar',
         'is_admin',
         'email_verified_at',
