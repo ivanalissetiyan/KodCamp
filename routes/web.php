@@ -34,24 +34,25 @@ Route::get('payment/success', [UserController::class, 'midtransCallback']);
 Route::post('payment/success', [UserController::class, 'midtransCallback']);
 
 Route::middleware(['auth'])->group(function () {
-    // Checkout Routes
+
+    // checkout routes
     Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success')->middleware('ensureUserRole:user');
-    Route::get('checkout/{camp:slug}', [CheckoutController::class, 'create'])->name('checkout.create')->middleware('ensureUserRole:user');;
-    Route::post('checkout/{camp}', [CheckoutController::class, 'store'])->name('checkout.store')->middleware('ensureUserRole:user');;
+    Route::get('checkout/{camp:slug}', [CheckoutController::class, 'create'])->name('checkout.create')->middleware('ensureUserRole:user');
+    Route::post('checkout/{camp}', [CheckoutController::class, 'store'])->name('checkout.store')->middleware('ensureUserRole:user');
 
-    // Dashboard
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    // dashboard
+    Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
-    // User Dashboard
+    // user dashboard
     Route::prefix('user/dashboard')->namespace('User')->name('user.')->middleware('ensureUserRole:user')->group(function () {
         Route::get('/', [UserDashboard::class, 'index'])->name('dashboard');
     });
 
-    // Admin Dashboard
+    // admin dashboard
     Route::prefix('admin/dashboard')->namespace('Admin')->name('admin.')->middleware('ensureUserRole:admin')->group(function () {
         Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
 
-        // Admin Checkout
+        // admin checkout
         Route::post('checkout/{checkout}', [AdminCheckout::class, 'update'])->name('checkout.update');
     });
 });

@@ -74,6 +74,8 @@ class CheckoutController extends Controller
         $user->email = $data['email'];
         $user->name = $data['name'];
         $user->pekerjaan = $data['pekerjaan'];
+        $user->phone = $data['phone'];
+        $user->address = $data['address'];
         $user->save();
 
         // Create Checkout
@@ -164,7 +166,7 @@ class CheckoutController extends Controller
             "city" => "",
             "postal_code" => "",
             "phone" => $checkout->User->phone,
-            "country_code" => "IDN"
+            "country_code" => "IDN",
         ];
 
         $customer_details = [
@@ -176,7 +178,7 @@ class CheckoutController extends Controller
             "shipping_address" => $userData,
         ];
 
-        $midtrans_paranms = [
+        $midtrans_params = [
             'transaction_details' => $transaction_details,
             'customer_details' => $customer_details,
             'item_details' => $item_details,
@@ -184,7 +186,7 @@ class CheckoutController extends Controller
 
         try {
             // Get Snap Payment Page URL
-            $paymentUrl = \Midtrans\Snap::createTransaction($params)->redirect_url;
+            $paymentUrl = \Midtrans\Snap::createTransaction($midtrans_params)->redirect_url;
             $checkout->midtrans_url = $paymentUrl;
             $checkout->save();
 
@@ -194,9 +196,10 @@ class CheckoutController extends Controller
         }
     }
 
+
     public function midtransCallback(Request $request)
     {
-        $notif = new Midtrans\Notification();
+        $notif = $request->method() == 'POST' ? new Midtrans\Notification() : Midtrans\Transaction::status($request->order_id);
 
         $transaction_status = $notif->transaction_status;
         $fraud = $notif->fraud_status;
@@ -207,30 +210,31 @@ class CheckoutController extends Controller
         if ($transaction_status == 'capture') {
             if ($fraud == 'challenge') {
                 // TODO Set payment status in merchant's database to 'challenge'
-                $checkout->payment_status = 'tertunda';
+                $checkout->payment_status = 'pending';
             } else if ($fraud == 'accept') {
                 // TODO Set payment status in merchant's database to 'success'
-                $checkout->payment_status = 'dibayar';
+                $checkout->payment_status = 'paid';
             }
         } else if ($transaction_status == 'cancel') {
             if ($fraud == 'challenge') {
                 // TODO Set payment status in merchant's database to 'failure'
-                $checkout->payment_status = 'gagal';
+                $checkout->payment_status = 'failed';
             } else if ($fraud == 'accept') {
                 // TODO Set payment status in merchant's database to 'failure'
+                $checkout->payment_status = 'failed';
             }
         } else if ($transaction_status == 'deny') {
             // TODO Set payment status in merchant's database to 'failure'
-            $checkout->payment_status = 'gagal';
+            $checkout->payment_status = 'failed';
         } else if ($transaction_status == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
-            $checkout->payment_status = 'dibayar';
+            $checkout->payment_status = 'paid';
         } else if ($transaction_status == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
             $checkout->payment_status = 'pending';
         } else if ($transaction_status == 'expire') {
             // TODO set payment status in merchant's database to 'expire'
-            $checkout->payment_status = 'gagal';
+            $checkout->payment_status = 'failed';
         }
 
         $checkout->save();
