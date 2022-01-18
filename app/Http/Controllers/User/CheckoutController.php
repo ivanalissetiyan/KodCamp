@@ -18,7 +18,7 @@ use Midtrans;
 class CheckoutController extends Controller
 {
 
-    public function ___construct()
+    public function __construct()
     {
         Midtrans\Config::$serverKey = env('MIDTRANS_SERVERKEY');
         Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
@@ -142,6 +142,7 @@ class CheckoutController extends Controller
 
     public function getSnapRedirect(Checkout $checkout)
     {
+
         $orderId = $checkout->id . '-' . Str::random(5);
         $price = $checkout->Camp->price * 1000;
 
