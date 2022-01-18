@@ -18,7 +18,6 @@
                                     <th>Harga</th>
                                     <th>Register Data</th>
                                     <th>Paid Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,11 +28,7 @@
                                         <td>Rp {{ $checkout->Camp->price }}.000</td>
                                         <td>{{ $checkout->created_at->format('M d Y') }}</td>
                                         <td>
-                                            @if ($checkout->is_paid)
-                                                <span class="badge bg-success">Di Bayar</span>
-                                            @else
-                                                <span class="badge bg-warning">Menunggu</span>
-                                            @endif
+                                            <strong>{{ $checkout->payment_status }}</strong>
                                         </td>
                                         <td>
                                             @if (!$checkout->is_paid)
