@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-9 offset-2">
+            <div class="col-9 offset-2 p-4">
                 <div class="card">
                     <div class="card-header">
                         My Camps
@@ -29,17 +29,6 @@
                                         <td>{{ $checkout->created_at->format('M d Y') }}</td>
                                         <td>
                                             <strong>{{ $checkout->payment_status }}</strong>
-                                        </td>
-                                        <td>
-                                            @if (!$checkout->is_paid)
-                                                <form action="{{ route('admin.checkout.update', $checkout->id) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <button class="btn btn-outline-info">Set to Paid</button>
-                                                </form>
-                                            @else
-
-                                            @endif
                                         </td>
                                     </tr>
                                 @empty
