@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\User\Checkout\Store;
 use App\Mail\Checkout\AfterCheckout;
 use App\Models\Camp;
+use App\Models\Discount;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Mail;
@@ -77,6 +78,13 @@ class CheckoutController extends Controller
         $user->phone = $data['phone'];
         $user->address = $data['address'];
         $user->save();
+
+        // Checkout Discount
+        if ($request->discount) {
+            $discount = Discount::whereCode($request->discount)->first();
+            $data['discount_id'] = $discount->id;
+            $data['discount_precentage'] = $discount->precentage;
+        }
 
         // Create Checkout
         $checkout = Checkout::create($data);
